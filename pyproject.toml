@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "tfteams"
+version = "0.1.0"
+description = ""
+authors = ["hugo-andriamaromanana <hugo.andriamaromanana@laplateforme.io>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.0"
+loguru = "^0.7.2"
+icecream = "^2.1.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
