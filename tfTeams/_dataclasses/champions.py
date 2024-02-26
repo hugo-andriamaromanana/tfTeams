@@ -1,8 +1,14 @@
 from dataclasses import dataclass
-from typing import List
-
+from typing import List, Any
+from abc import ABC, abstractmethod
 from .synergy import Synergy
-from .champion_type import ChampionType
+
+@dataclass
+class ChampionType(ABC):
+    cost: int
+    @abstractmethod
+    def get_current_synergy(self) -> Any:
+        pass
 
 @dataclass
 class StandardChampion(ChampionType):
