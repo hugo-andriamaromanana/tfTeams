@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from pathlib import Path
 import re
 from typing import List, Dict, Tuple
@@ -12,6 +13,7 @@ def split_stade_parsed(string_to_split: str) -> Tuple[int, str]:
         raise ValueError("Splitting error, couldn't split the string into a tuple of int & string")
     return (int(match_string.group(1)), match_string.group(2))
 
+
 def get_medal_from_initial(initial: str) -> Medal:
     match initial:
         case "b":
@@ -24,6 +26,7 @@ def get_medal_from_initial(initial: str) -> Medal:
             return Medal.Platinum
         case _:
             raise ValueError("Initial error, no medal was found")
+        
 
 def get_stades(stades_parsed: List[str]) -> Dict[int, Medal]:
     synergy_medal_by_rank = {}
@@ -32,16 +35,31 @@ def get_stades(stades_parsed: List[str]) -> Dict[int, Medal]:
         synergy_medal_by_rank[rank] = get_medal_from_initial(initial=medal_initial)
     return synergy_medal_by_rank
 
-def create_all_synergies(syn_dataset: Path) -> List[Synergy]:
-    synergies_dataframe = parse_csv_synergies(syn_dataset=syn_dataset)
+
+def create_all_synergies(syn_dataset_path: Path) -> List[Synergy]:
+    synergies_dataframe = parse_csv_synergies(syn_dataset=syn_dataset_path)
     all_synergies = []
     for _, synergy_row in synergies_dataframe.iterrows():
         medals_stade = get_stades(synergy_row["stades"])
         all_synergies.append(Synergy(name=synergy_row["name"], stades=medals_stade))
     return all_synergies
 
-def create_synergy_by_name(synergy_name: str, all_synergies: List[Synergy]) -> Synergy:
-    for synergy in all_synergies:
-        if synergy.name == synergy_name:
-            return synergy
-    raise ValueError("Synergy was not found by name")
+
+class CreateAllSynergies:
+    _instance = None
+
+    def __new__(cls):
+        if not cls._instance:
+            cls._instance = super(CreateAllSynergies, cls).__new__(cls)
+            cls._instance.initialize(Path(""))
+        return cls._instance
+    
+    def initialize(self, syn_dataset_path: Path):
+        self.all_synergies = create_all_synergies(syn_dataset_path=syn_dataset_path)
+
+    
+
+synergies_singleton = CreateAllSynergies()
+synergies_singleton.initialize(Path(""))
+ALL_SYNERGIES = synergies_singleton.all_synergies
+
