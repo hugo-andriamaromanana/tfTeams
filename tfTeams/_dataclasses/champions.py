@@ -5,6 +5,7 @@ from .synergy import Synergy
 
 @dataclass
 class ChampionType(ABC):
+    name: str
     cost: int
     @abstractmethod
     def get_current_synergy(self) -> Any:
