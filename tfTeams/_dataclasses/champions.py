@@ -14,7 +14,7 @@ class ChampionCost(Enum):
 @dataclass
 class ChampionType(ABC):
     name: str
-    cost: ChampionCost
+
     @abstractmethod
     def get_current_synergy(self) -> Any:
         pass
