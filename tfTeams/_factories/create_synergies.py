@@ -50,16 +50,20 @@ class CreateAllSynergies:
 
     def __new__(cls):
         if not cls._instance:
-            cls._instance = super(CreateAllSynergies, cls).__new__(cls)
-            cls._instance.initialize(Path(""))
+            cls._instance = super().__new__(cls)
         return cls._instance
     
     def initialize(self, syn_dataset_path: Path):
-        self.all_synergies = create_all_synergies(syn_dataset_path=syn_dataset_path)
+        if syn_dataset_path != Path(""):
+            return create_all_synergies(syn_dataset_path=syn_dataset_path) 
+        return []
+
+    def update_config(self, syn_dataset_path:Path):
+        return self.initialize(syn_dataset_path=syn_dataset_path)
 
     
 
-synergies_singleton = CreateAllSynergies()
-synergies_singleton.initialize(Path(""))
-ALL_SYNERGIES = synergies_singleton.all_synergies
+ALL_SYNERGIES = CreateAllSynergies().initialize(Path(""))
+
+
 

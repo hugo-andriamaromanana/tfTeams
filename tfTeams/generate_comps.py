@@ -7,12 +7,12 @@ from tfTeams._evaluation.evaluate import Comp
 from tfTeams._factories.create_champions import create_all_champions
 
 
-def generate_all_champions_combinations(champions_dataset_path: Path, length_comp: int) -> combinations[Tuple[StandardChampion, ...]]:
+def generate_all_champions_combinations(champions_dataset_path: Path, length_comp: int) -> combinations:
     all_champions = create_all_champions(champ_dataset_path=champions_dataset_path)
     all_combinations = combinations(all_champions, length_comp)
     return all_combinations
 
-def find_best_comps(all_champion_combinations: combinations[Tuple[StandardChampion, ...]]) -> List[Comp]:
+def find_best_comps(all_champion_combinations: combinations) -> List[Comp]:
     """
     With all possible combinations , we are looking for THE BEST compositions by their evaluation. 
     Iterate through all combinations, transforms the current combination into a composition.
@@ -30,3 +30,7 @@ def find_best_comps(all_champion_combinations: combinations[Tuple[StandardChampi
         elif actual_score == best_score:
             best_compositions.append(actual_composition)
     return best_compositions
+
+
+def display_best_comps(best_comps: List[Comp]) -> None:
+    pass

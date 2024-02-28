@@ -7,10 +7,14 @@ from tfTeams._dataclasses.champions import StandardChampion, ChampionCost
 from tfTeams._factories.create_synergies import ALL_SYNERGIES
 from tfTeams._parsers.dataset_parsers import parse_csv_champions
 
+from icecream import ic
+
 def create_synergy_by_name(synergy_name: str) -> Synergy:
     for synergy in ALL_SYNERGIES:
         if synergy.name == synergy_name:
             return synergy
+    ic(synergy_name)
+    ic(ALL_SYNERGIES)
     raise ValueError("Synergy was not found by name")
 
 def create_all_champions(champ_dataset_path: Path) -> List[StandardChampion]:
