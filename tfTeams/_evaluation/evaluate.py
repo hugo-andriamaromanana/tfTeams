@@ -24,7 +24,7 @@ def calculate_champions_score(champions: List[StandardChampion]) -> float:
     return score
 
 def count_synergies(comp: list[StandardChampion]) -> Dict[Synergy, int]:
-    all_synergies_as_dict = {synergy: 0 for synergy in ALL_SYNERGIES}
+    all_synergies_as_dict = {synergy: 0 for synergy in ALL_SYNERGIES.get_synergies()}
     for champion in comp:
         for synergy in champion.synergies:
             all_synergies_as_dict[synergy] += 1

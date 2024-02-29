@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from hashlib import md5
 from typing import Dict, Optional
 
 from .rank import Medal
@@ -16,4 +17,4 @@ class Synergy:
         return None
             
     def __hash__(self):
-        return hash(self)
+        return hash(self.name)

@@ -10,11 +10,11 @@ from tfTeams._parsers.dataset_parsers import parse_csv_champions
 from icecream import ic
 
 def create_synergy_by_name(synergy_name: str) -> Synergy:
-    for synergy in ALL_SYNERGIES:
+    for synergy in ALL_SYNERGIES.get_synergies():
         if synergy.name == synergy_name:
             return synergy
-    ic(synergy_name)
-    ic(ALL_SYNERGIES)
+    print(synergy_name)
+    print(ALL_SYNERGIES.get_synergies())
     raise ValueError("Synergy was not found by name")
 
 def create_all_champions(champ_dataset_path: Path) -> List[StandardChampion]:

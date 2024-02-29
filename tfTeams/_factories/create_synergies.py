@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from importlib.machinery import all_suffixes
 from pathlib import Path
 import re
 from typing import List, Dict, Tuple
@@ -55,15 +56,20 @@ class CreateAllSynergies:
     
     def initialize(self, syn_dataset_path: Path):
         if syn_dataset_path != Path(""):
-            return create_all_synergies(syn_dataset_path=syn_dataset_path) 
-        return []
-
+            self.all_synergies = create_all_synergies(syn_dataset_path=syn_dataset_path) 
+        else:
+            self.all_synergies = []
+            
     def update_config(self, syn_dataset_path:Path):
         return self.initialize(syn_dataset_path=syn_dataset_path)
+    
+    def get_synergies(self):
+        return self.all_synergies
 
     
 
-ALL_SYNERGIES = CreateAllSynergies().initialize(Path(""))
 
+ALL_SYNERGIES = CreateAllSynergies()
+ALL_SYNERGIES.initialize(syn_dataset_path=Path(""))
 
 
