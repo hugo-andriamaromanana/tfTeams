@@ -25,3 +25,29 @@ def create_all_champions(champ_dataset_path: Path) -> List[StandardChampion]:
         all_champions.append(StandardChampion(name=champion_row["name"], cost=ChampionCost(champion_row["cost"]), synergies=champion_synergies))
     return all_champions
 
+
+class CreateAllChampions:
+    _instance = None
+
+    def __new__(cls):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+    
+    def initialize(self, champ_dataset_path: Path):
+        if champ_dataset_path != Path(""):
+            self.all_champions = create_all_champions(champ_dataset_path=champ_dataset_path) 
+        else:
+            self.all_champions = []
+            
+    def update_config(self, champ_dataset_path:Path):
+        return self.initialize(champ_dataset_path=champ_dataset_path)
+    
+    def get_synergies(self):
+        return self.all_champions
+
+    
+
+
+ALL_CHAMPIONS = CreateAllChampions()
+ALL_CHAMPIONS.initialize(champ_dataset_path=Path(""))
