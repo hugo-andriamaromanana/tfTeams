@@ -19,9 +19,12 @@ class ChampionType(ABC):
     def get_current_synergy(self) -> Any:
         pass
 
-@dataclass
+@dataclass(eq=True)
 class StandardChampion(ChampionType):
     synergies: List[Synergy]
     
     def get_current_synergy(self) -> List[Synergy]:
         return self.synergies
+    
+    def __hash__(self) -> int:
+        return hash(self.name)
