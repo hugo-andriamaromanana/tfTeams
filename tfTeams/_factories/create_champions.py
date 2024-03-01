@@ -7,7 +7,6 @@ from tfTeams._dataclasses.champions import StandardChampion, ChampionCost
 from tfTeams._factories.create_synergies import ALL_SYNERGIES
 from tfTeams._parsers.dataset_parsers import parse_csv_champions
 
-from icecream import ic
 
 def create_synergy_by_name(synergy_name: str) -> Synergy:
     for synergy in ALL_SYNERGIES.get_synergies():
