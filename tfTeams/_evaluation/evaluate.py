@@ -49,7 +49,7 @@ class Comp:
     
     def all_medals_from_comp(self, headliner:Synergy) -> List[Medal]:
         medals = []
-        for count,synergy in enumerate(self.all_synergies_count):
+        for synergy, count in self.all_synergies_count.items():
             if synergy == headliner:
                 count+=1
             medal = synergy.get_medal_for_rank(count)
