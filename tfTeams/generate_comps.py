@@ -1,5 +1,3 @@
-from itertools import combinations
-from pathlib import Path
 from random import randint, shuffle
 from typing import List
 from tfTeams._dataclasses.champions import StandardChampion
@@ -10,8 +8,8 @@ from tfTeams._factories.create_champions import ALL_CHAMPIONS
 def generate_random_list_champions(length_compositon) -> List[StandardChampion]:
     list_champions = []
     while len(list_champions) < length_compositon:
-        random_champ = ALL_CHAMPIONS.all_champions[
-            randint(0, len(ALL_CHAMPIONS.all_champions) - 1)
+        random_champ = ALL_CHAMPIONS[
+            randint(0, len(ALL_CHAMPIONS) - 1)
         ]
         if random_champ not in list_champions:
             list_champions.append(random_champ)
@@ -75,8 +73,8 @@ def genetic_multiplication_composition(parent_composition: List[Comp]) -> List[C
 
 def generate_random_champion(composition: Comp) -> StandardChampion:
     while True:
-        random_champion = ALL_CHAMPIONS.all_champions[
-            randint(0, len(ALL_CHAMPIONS.all_champions) - 1)
+        random_champion = ALL_CHAMPIONS[
+            randint(0, len(ALL_CHAMPIONS) - 1)
         ]
         if random_champion not in composition.champions:
             return random_champion
